@@ -5,6 +5,7 @@ import io.restassured.http.Header;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+import utility.APIUtility;
 
 import java.util.List;
 
@@ -33,4 +34,15 @@ public class CreationSimpleRequestsTest {
         Header location = response.getHeaders().get("Location");
         System.out.println(location);
     }
+
+    @Test()
+    public void testLongRedirect() {
+        String url = "https://playground.learnqa.ru/api/long_redirect";
+        int redirectLimit = 35;
+        int redirectCount = APIUtility.getRedirectCount(url, redirectLimit);
+
+        System.out.println(redirectCount);
+
+    }
+
 }
