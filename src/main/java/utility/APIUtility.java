@@ -1,5 +1,6 @@
 package utility;
 
+import constant.Constant;
 import exception.TooManyAttemptsException;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -10,14 +11,14 @@ public class APIUtility {
     }
 
     public static String getLocation(Response response) {
-        String location = response.getHeader("Location");
+        String location = response.getHeader(Constant.LOCATION);
         if (location == null) {
             throw new NullPointerException("Header 'Location' is NULL");
         }
         return location;
     }
 
-    public static int getRedirectCount(String url, int redirectLimit){
+    public static int getRedirectCount(String url, int redirectLimit) {
         Response response;
         String location;
         int redirectCount = 0;
@@ -43,5 +44,9 @@ public class APIUtility {
             }
         }
         return redirectCount;
+    }
+
+    public static String getAuthCookie(Response response) {
+        return response.getCookie(Constant.AUTH_COOKIE);
     }
 }

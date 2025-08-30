@@ -1,23 +1,29 @@
 package homework;
 
+import constant.Constant;
+import constant.URL;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import utility.APIUtility;
+import utility.JobUtility;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CreationSimpleRequestsTest {
 
     @Test()
     public void testJsonParsing() {
         JsonPath response = RestAssured
-                .get("https://playground.learnqa.ru/api/get_json_homework")
+                .get(URL.API_GET_JSON_HOMEWORK)
                 .jsonPath();
 
-        List<Object> messagesList = response.getList("messages");
+        List<Object> messagesList = response.getList(Constant.MESSAGES);
         System.out.println(messagesList.get(1));
     }
 
@@ -28,21 +34,60 @@ public class CreationSimpleRequestsTest {
                 .redirects()
                 .follow(false)
                 .when()
-                .get("https://playground.learnqa.ru/api/long_redirect")
+                .get(URL.API_LONG_REDIRECT)
                 .andReturn();
 
-        Header location = response.getHeaders().get("Location");
+        Header location = response.getHeaders().get(Constant.LOCATION);
         System.out.println(location);
     }
 
     @Test()
     public void testLongRedirect() {
-        String url = "https://playground.learnqa.ru/api/long_redirect";
+        String url = URL.API_LONG_REDIRECT;
         int redirectLimit = 35;
         int redirectCount = APIUtility.getRedirectCount(url, redirectLimit);
 
         System.out.println(redirectCount);
 
+    }
+
+    @Test()
+    public void testTokens() {
+        JsonPath createTaskResponse = RestAssured
+                .get(URL.API_LONGTIME_JOB)
+                .jsonPath();
+
+        String token = JobUtility.getToken(createTaskResponse);
+        int seconds = JobUtility.workTimeCompletion(createTaskResponse);
+
+        Map<String, String> params = new HashMap<>();
+        params.put(Constant.TOKEN, token);
+
+        JsonPath jobProgressResponse = RestAssured
+                .given()
+                .queryParams(params)
+                .when()
+                .get(URL.API_LONGTIME_JOB)
+                .jsonPath();
+
+        String responseError = JobUtility.getError(jobProgressResponse);
+
+        JobUtility.checkError(responseError);
+        String responseStatus = JobUtility.getStatus(jobProgressResponse);
+        JobUtility.waitForJobCompletion(responseStatus, seconds);
+
+        JsonPath jobReadyResponse = RestAssured
+                .given()
+                .queryParams(params)
+                .when()
+                .get(URL.API_LONGTIME_JOB)
+                .jsonPath();
+
+        String jobReadyResponseResult = JobUtility.getResult(jobReadyResponse);
+        String jobReadyResponseStatus = JobUtility.getStatus(jobReadyResponse);
+
+        Assertions.assertEquals(Constant.READY_RESPONSE_RESULT, jobReadyResponseResult);
+        Assertions.assertEquals(Constant.JOB_IS_READY, jobReadyResponseStatus);
     }
 
 }

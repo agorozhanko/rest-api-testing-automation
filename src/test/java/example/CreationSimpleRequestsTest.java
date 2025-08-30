@@ -1,10 +1,13 @@
 package example;
 
+import constant.Constant;
+import constant.URL;
 import io.restassured.RestAssured;
 import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+import utility.APIUtility;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +22,7 @@ public class CreationSimpleRequestsTest {
         JsonPath response = RestAssured
                 .given()
                 .queryParams(params)
-                .get("https://playground.learnqa.ru/api/hello")
+                .get(URL.API_HELLO)
                 .jsonPath();
 
         String name = response.get("answer2");
@@ -40,7 +43,7 @@ public class CreationSimpleRequestsTest {
         Response response = RestAssured
                 .given()
                 .body(body)
-                .post("https://playground.learnqa.ru/api/check_type")
+                .post(URL.API_CHECK_TYPE)
                 .andReturn();
         response.print();
     }
@@ -48,7 +51,7 @@ public class CreationSimpleRequestsTest {
     @Test()
     public void testRestAssuredStatusCode200() {
         Response response = RestAssured
-                .get("https://playground.learnqa.ru/api/check_type")
+                .get(URL.API_CHECK_TYPE)
                 .andReturn();
         int statusCode = response.getStatusCode();
         System.out.println(statusCode);
@@ -60,7 +63,7 @@ public class CreationSimpleRequestsTest {
                 .given()
                 .redirects()
                 .follow(false)
-                .get("https://playground.learnqa.ru/api/get_303")
+                .get(URL.API_GET_303)
                 .andReturn();
 
         int statusCode = response.getStatusCode();
@@ -70,7 +73,7 @@ public class CreationSimpleRequestsTest {
     @Test()
     public void testRestAssuredStatusCode400() {
         Response response = RestAssured
-                .get("https://playground.learnqa.ru/api/something")
+                .get(URL.API_SOMETHING)
                 .andReturn();
 
         int statusCode = response.getStatusCode();
@@ -80,7 +83,7 @@ public class CreationSimpleRequestsTest {
     @Test()
     public void testRestAssuredStatusCode500() {
         Response response = RestAssured
-                .get("https://playground.learnqa.ru/api/get_500")
+                .get(URL.API_GET_500)
                 .andReturn();
 
         int statusCode = response.getStatusCode();
@@ -97,7 +100,7 @@ public class CreationSimpleRequestsTest {
                 .given()
                 .headers(headers)
                 .when()
-                .get("https://playground.learnqa.ru/api/show_all_headers")
+                .get(URL.API_SHOW_ALL_HEADERS)
                 .andReturn();
 
         response.prettyPrint();
@@ -109,14 +112,14 @@ public class CreationSimpleRequestsTest {
     @Test()
     public void testRestAssuredCookies() {
         Map<String, String> data = new HashMap<>();
-        data.put("login", "secret_login");
-        data.put("password", "secret_pass");
+        data.put(Constant.LOGIN, Constant.SECRET_LOGIN);
+        data.put(Constant.PASSWORD, Constant.SECRET_PASS);
 
         Response response = RestAssured
                 .given()
                 .body(data)
                 .when()
-                .post("https://playground.learnqa.ru/api/get_auth_cookie")
+                .post(URL.API_GET_AUTH_COOKIE)
                 .andReturn();
 
         System.out.println("\nPretty text:");
@@ -130,21 +133,21 @@ public class CreationSimpleRequestsTest {
         Map<String, String> responseCookies = response.getCookies();
         System.out.println(responseCookies);
 
-        String responseCookie = response.getCookie("auth_cookie");
+        String responseCookie = APIUtility.getAuthCookie(response);
         System.out.println(responseCookie);
     }
 
     @Test()
     public void testRestAssuredWrongCookies() {
         Map<String, String> data = new HashMap<>();
-        data.put("login", "secret_login2");
-        data.put("password", "secret_pass2");
+        data.put(Constant.LOGIN, "secret_login2");
+        data.put(Constant.PASSWORD, "secret_pass2");
 
         Response response = RestAssured
                 .given()
                 .body(data)
                 .when()
-                .post("https://playground.learnqa.ru/api/get_auth_cookie")
+                .post(URL.API_GET_AUTH_COOKIE)
                 .andReturn();
 
         System.out.println("\nPretty text:");
@@ -158,28 +161,28 @@ public class CreationSimpleRequestsTest {
         Map<String, String> responseCookies = response.getCookies();
         System.out.println(responseCookies);
 
-        String responseCookie = response.getCookie("auth_cookie");
+        String responseCookie = APIUtility.getAuthCookie(response);
         System.out.println(responseCookie);
     }
 
     @Test()
     public void testRestAssuredCookiesForCheck() {
         Map<String, String> data = new HashMap<>();
-        data.put("login", "secret_login");
-        data.put("password", "secret_pass");
+        data.put(Constant.LOGIN, Constant.SECRET_LOGIN);
+        data.put(Constant.PASSWORD, Constant.SECRET_PASS);
 
         Response response = RestAssured
                 .given()
                 .body(data)
                 .when()
-                .post("https://playground.learnqa.ru/api/get_auth_cookie")
+                .post(URL.API_GET_AUTH_COOKIE)
                 .andReturn();
 
-        String responseCookie = response.getCookie("auth_cookie");
+        String responseCookie = APIUtility.getAuthCookie(response);
 
         Map<String, String> cookies = new HashMap<>();
         if (responseCookie != null) {
-            cookies.put("auth_cookie", responseCookie);
+            cookies.put(Constant.AUTH_COOKIE, responseCookie);
         }
 
         Response responseForCheck = RestAssured
@@ -187,7 +190,7 @@ public class CreationSimpleRequestsTest {
                 .body(data)
                 .cookies(cookies)
                 .when()
-                .post("https://playground.learnqa.ru/api/check_auth_cookie")
+                .post(URL.API_CHECK_AUTH_COOKIE)
                 .andReturn();
 
         responseForCheck.print();
