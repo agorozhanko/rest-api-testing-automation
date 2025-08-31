@@ -2,6 +2,7 @@ package homework;
 
 import constant.Constant;
 import constant.URL;
+import exception.PasswordNotFoundException;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.path.json.JsonPath;
@@ -88,6 +89,50 @@ public class CreationSimpleRequestsTest {
 
         Assertions.assertEquals(Constant.READY_RESPONSE_RESULT, jobReadyResponseResult);
         Assertions.assertEquals(Constant.JOB_IS_READY, jobReadyResponseStatus);
+    }
+
+    @Test
+    public void testFindPassword() {
+        String login = "super_admin";
+
+        List<String> passwordsList = List.of(
+                "123456", "password", "123456789", "12345", "12345678", "qwerty", "1234567", "111111",
+                "123123", "abc123", "password1", "1234", "qwertyuiop", "123", "iloveyou", "admin", "welcome",
+                "monkey", "login", "princess", "qwerty123", "solo", "starwars", "passw0rd", "trustno1"
+        );
+
+        String correctPassword = passwordSelection(login, passwordsList);
+        System.out.println("Найден пароль: " + correctPassword);
+
+    }
+
+    private static String passwordSelection(String login, List<String> passwordsList) {
+
+        for (String password : passwordsList) {
+            Response getSecretPasswordResponse = RestAssured
+                    .given()
+                    .param(Constant.LOGIN, login)
+                    .param(Constant.PASSWORD, password)
+                    .when()
+                    .post(URL.API_GET_SECRET_PASSWORD_HOMEWORK)
+                    .andReturn();
+
+            String authCookie = APIUtility.getAuthCookie(getSecretPasswordResponse);
+
+            Response checkAuthCookieResponse = RestAssured
+                    .given()
+                    .cookie(Constant.AUTH_COOKIE, authCookie)
+                    .when()
+                    .post(URL.API_CHECK_AUTH_COOKIE)
+                    .andReturn();
+
+            String authStatus = checkAuthCookieResponse.asString();
+
+            if (authStatus.equals(Constant.YOU_ARE_AUTHORIZED)) {
+                return password;
+            }
+        }
+        throw new PasswordNotFoundException();
     }
 
 }

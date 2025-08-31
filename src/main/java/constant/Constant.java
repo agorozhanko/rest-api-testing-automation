@@ -17,4 +17,5 @@ public interface Constant {
     String STATUS = "status";
     String ERROR = "error";
     String SECONDS = "seconds";
+    String YOU_ARE_AUTHORIZED = "You are authorized";
 }
