@@ -15,4 +15,6 @@ public interface URL {
     String API_LONG_REDIRECT = BASE_API_URL + "/long_redirect";
     String API_LONGTIME_JOB = "https://playground.learnqa.ru/ajax/api/longtime_job";
     String API_GET_SECRET_PASSWORD_HOMEWORK = "https://playground.learnqa.ru/ajax/api/get_secret_password_homework";
+    String API_USER_LOGIN = BASE_API_URL + "/user/login";
+    String API_USER_AUTH = BASE_API_URL + "/user/auth";
 }

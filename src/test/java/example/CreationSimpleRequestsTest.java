@@ -161,8 +161,8 @@ public class CreationSimpleRequestsTest {
         Map<String, String> responseCookies = response.getCookies();
         System.out.println(responseCookies);
 
-        String responseCookie = APIUtility.getAuthCookie(response);
-        System.out.println(responseCookie);
+//        String responseCookie = APIUtility.getAuthCookie(response);
+//        System.out.println(responseCookie);
     }
 
     @Test()

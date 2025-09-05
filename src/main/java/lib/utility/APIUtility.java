@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Assertions;
 
 import java.util.Map;
 
+import static org.hamcrest.Matchers.hasKey;
+
 public class APIUtility {
     public static int getStatusCode(Response response) {
         return response.getStatusCode();
@@ -34,6 +36,15 @@ public class APIUtility {
 
     public static String getAuthCookie(Response response) {
         return getCookie(response, Constant.AUTH_COOKIE);
+    }
+
+    public static int getIntFromJson(Response response, String name) {
+        response.then().assertThat().body("$", hasKey(name));
+        return response.jsonPath().getInt(name);
+    }
+
+    public static int getUserIdFromJson(Response response) {
+        return getIntFromJson(response, "user_id");
     }
 
     public static int getRedirectCount(String url, int redirectLimit) {
