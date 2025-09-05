@@ -1,4 +1,4 @@
-package exception;
+package lib.exception;
 
 public class PasswordNotFoundException extends NullPointerException {
     public PasswordNotFoundException(String message) {

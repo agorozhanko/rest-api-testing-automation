@@ -1,4 +1,4 @@
-package constant;
+package lib.constant;
 
 public interface URL {
     String BASE_API_URL = "https://playground.learnqa.ru/api";

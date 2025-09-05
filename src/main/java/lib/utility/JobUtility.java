@@ -1,6 +1,6 @@
-package utility;
+package lib.utility;
 
-import constant.Constant;
+import lib.constant.Constant;
 import io.restassured.path.json.JsonPath;
 
 import java.util.concurrent.TimeUnit;

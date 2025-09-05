@@ -1,8 +1,8 @@
-package utility;
+package lib.utility;
 
-import constant.Constant;
-import constant.URL;
-import exception.PasswordNotFoundException;
+import lib.constant.Constant;
+import lib.constant.URL;
+import lib.exception.PasswordNotFoundException;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 

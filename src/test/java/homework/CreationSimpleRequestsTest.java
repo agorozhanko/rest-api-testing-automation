@@ -1,16 +1,16 @@
 package homework;
 
-import constant.Constant;
-import constant.URL;
+import lib.constant.Constant;
+import lib.constant.URL;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import utility.APIUtility;
-import utility.JobUtility;
-import utility.PasswordUtility;
+import lib.utility.APIUtility;
+import lib.utility.JobUtility;
+import lib.utility.PasswordUtility;
 
 import java.util.Arrays;
 import java.util.HashMap;

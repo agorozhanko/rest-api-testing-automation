@@ -1,4 +1,4 @@
-package constant;
+package lib.constant;
 
 public interface Constant {
     String JOB_IS_READY = "Job is ready";
