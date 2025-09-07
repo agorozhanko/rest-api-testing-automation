@@ -11,6 +11,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.hasKey;
 
 public class APIUtility {
+
     public static int getStatusCode(Response response) {
         return response.getStatusCode();
     }
@@ -51,7 +52,24 @@ public class APIUtility {
     }
 
     public static int getUserIdFromJson(Response response) {
-        return getIntFromJson(response, "user_id");
+        return getIntFromJson(response, lib.constant.Response.USER_ID);
+    }
+
+    public static String getStringFromJson(Response response, String name) {
+        response.then().assertThat().body("$", hasKey(name));
+        return response.jsonPath().getString(name);
+    }
+
+    public static String getPlatformFromJson(Response response) {
+        return getStringFromJson(response, lib.constant.Response.PLATFORM);
+    }
+
+    public static String getBrowserFromJson(Response response) {
+        return getStringFromJson(response, lib.constant.Response.BROWSER);
+    }
+
+    public static String getDeviceFromJson(Response response) {
+        return getStringFromJson(response, lib.constant.Response.DEVICE);
     }
 
     public static int getRedirectCount(String url, int redirectLimit) {

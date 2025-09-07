@@ -21,4 +21,8 @@ public interface Response {
     String HEADERS = "headers";
     String HOME_WORK = "HomeWork";
     String X_SECRET_HOMEWORK_HEADER = "x-secret-homework-header";
+    String USER_AGENT = "User-Agent";
+    String PLATFORM = "platform";
+    String BROWSER = "browser";
+    String DEVICE = "device";
 }

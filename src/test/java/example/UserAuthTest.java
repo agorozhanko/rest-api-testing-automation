@@ -3,7 +3,7 @@ package example;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import lib.assertions.BaseAssertions;
+import lib.assertions.Assertions;
 import lib.constant.URL;
 import lib.utility.APIUtility;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +45,7 @@ public class UserAuthTest {
                 .get(URL.API_USER_AUTH)
                 .andReturn();
 
-        BaseAssertions.assertJsonByName(responseCheckAuth, lib.constant.Response.USER_ID, userIdOnAuth);
+        Assertions.assertJsonByName(responseCheckAuth, lib.constant.Response.USER_ID, userIdOnAuth);
     }
 
     @ParameterizedTest
@@ -63,6 +63,6 @@ public class UserAuthTest {
         }
 
         Response responseForCheck = spec.get().andReturn();
-        BaseAssertions.assertJsonByName(responseForCheck, lib.constant.Response.USER_ID, 0);
+        Assertions.assertJsonByName(responseForCheck, lib.constant.Response.USER_ID, 0);
     }
 }
