@@ -20,4 +20,5 @@ public interface Response {
     String COOKIE = "cookie";
     String HEADERS = "headers";
     String HOME_WORK = "HomeWork";
+    String X_SECRET_HOMEWORK_HEADER = "x-secret-homework-header";
 }

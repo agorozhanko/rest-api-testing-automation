@@ -17,4 +17,6 @@ public interface URL {
     String API_GET_SECRET_PASSWORD_HOMEWORK = "https://playground.learnqa.ru/ajax/api/get_secret_password_homework";
     String API_USER_LOGIN = BASE_API_URL + "/user/login";
     String API_USER_AUTH = BASE_API_URL + "/user/auth";
+    String API_HOMEWORK_COOKIE = BASE_API_URL + "/homework_cookie";
+    String API_HOMEWORK_HEADER = BASE_API_URL + "/homework_header";
 }

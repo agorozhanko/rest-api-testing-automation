@@ -26,6 +26,10 @@ public class APIUtility {
         return getHeader(response, lib.constant.Response.LOCATION);
     }
 
+    public static String getHeaderXSecretHomeworkHeader(Response response) {
+        return getHeader(response, lib.constant.Response.X_SECRET_HOMEWORK_HEADER);
+    }
+
     public static String getCookie(Response response, String name) {
         Map<String, String> cookies = response.getCookies();
 
