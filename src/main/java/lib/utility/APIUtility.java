@@ -3,7 +3,6 @@ package lib.utility;
 import io.restassured.RestAssured;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
-import lib.constant.Constant;
 import lib.exception.TooManyAttemptsException;
 import org.junit.jupiter.api.Assertions;
 
@@ -24,7 +23,7 @@ public class APIUtility {
     }
 
     public static String getHeaderLocation(Response response) {
-        return getHeader(response, Constant.LOCATION);
+        return getHeader(response, lib.constant.Response.LOCATION);
     }
 
     public static String getCookie(Response response, String name) {
@@ -35,7 +34,7 @@ public class APIUtility {
     }
 
     public static String getAuthCookie(Response response) {
-        return getCookie(response, Constant.AUTH_COOKIE);
+        return getCookie(response, lib.constant.Response.AUTH_COOKIE);
     }
 
     public static int getIntFromJson(Response response, String name) {

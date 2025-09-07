@@ -25,7 +25,7 @@ public class CreationSimpleRequestsTest {
                 .get(URL.API_GET_JSON_HOMEWORK)
                 .jsonPath();
 
-        List<Object> messagesList = response.getList(Constant.MESSAGES);
+        List<Object> messagesList = response.getList(lib.constant.Response.MESSAGES);
         System.out.println(messagesList.get(1));
     }
 
@@ -39,7 +39,7 @@ public class CreationSimpleRequestsTest {
                 .get(URL.API_LONG_REDIRECT)
                 .andReturn();
 
-        Header location = response.getHeaders().get(Constant.LOCATION);
+        Header location = response.getHeaders().get(lib.constant.Response.LOCATION);
         System.out.println(location);
     }
 
@@ -63,7 +63,7 @@ public class CreationSimpleRequestsTest {
         int seconds = JobUtility.workTimeCompletion(createTaskResponse);
 
         Map<String, String> params = new HashMap<>();
-        params.put(Constant.TOKEN, token);
+        params.put(lib.constant.Response.TOKEN, token);
 
         JsonPath jobProgressResponse = RestAssured
                 .given()

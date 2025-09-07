@@ -1,12 +1,11 @@
 package example;
 
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import lib.assertions.BaseAssertions;
 import lib.constant.URL;
 import lib.utility.APIUtility;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,8 +22,8 @@ public class UserAuthTest {
     @BeforeEach
     public void loginUser() {
         Map<String, String> authData = new HashMap<>();
-        authData.put("email", "vinkotov@example.com");
-        authData.put("password", "1234");
+        authData.put(lib.constant.Response.EMAIL, "vinkotov@example.com");
+        authData.put(lib.constant.Response.PASSWORD, "1234");
 
         Response responseGetAuth = RestAssured
                 .given()
@@ -32,42 +31,38 @@ public class UserAuthTest {
                 .post(URL.API_USER_LOGIN)
                 .andReturn();
 
-        cookie = APIUtility.getCookie(responseGetAuth, "auth_sid");
-        header = APIUtility.getHeader(responseGetAuth, "x-csrf-token");
+        cookie = APIUtility.getCookie(responseGetAuth, lib.constant.Response.AUTH_SID);
+        header = APIUtility.getHeader(responseGetAuth, lib.constant.Response.X_CSRF_TOKEN);
         userIdOnAuth = APIUtility.getUserIdFromJson(responseGetAuth);
     }
 
     @Test
     public void testAuthUser() {
-        JsonPath responseCheckAuth = RestAssured
+        Response responseCheckAuth = RestAssured
                 .given()
-                .header("x-csrf-token", header)
-                .cookie("auth_sid", cookie)
+                .header(lib.constant.Response.X_CSRF_TOKEN, header)
+                .cookie(lib.constant.Response.AUTH_SID, cookie)
                 .get(URL.API_USER_AUTH)
-                .jsonPath();
+                .andReturn();
 
-        int userIdOnCheck = responseCheckAuth.getInt("user_id");
-        Assertions.assertTrue(userIdOnCheck > 0, String.format("Unexpected user id: '%s'", userIdOnCheck));
-        Assertions.assertEquals(userIdOnAuth, userIdOnCheck,
-                "User id from auth request is not equal to user_id from check request");
+        BaseAssertions.assertJsonByName(responseCheckAuth, lib.constant.Response.USER_ID, userIdOnAuth);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"cookie", "headers"})
+    @ValueSource(strings = {lib.constant.Response.COOKIE, lib.constant.Response.HEADERS})
     public void testNegativeAuthUser(String condition) {
         RequestSpecification spec = RestAssured.given();
         spec.baseUri(URL.API_USER_AUTH);
 
-        if (condition.equals("cookie")) {
-            spec.cookie("auth_sid", cookie);
-        } else if (condition.equals("headers")) {
-            spec.header("x-csrf-token", header);
+        if (condition.equals(lib.constant.Response.COOKIE)) {
+            spec.cookie(lib.constant.Response.AUTH_SID, cookie);
+        } else if (condition.equals(lib.constant.Response.HEADERS)) {
+            spec.header(lib.constant.Response.X_CSRF_TOKEN, header);
         } else {
             throw new IllegalArgumentException(String.format("Condition value is known: '%s'", condition));
         }
 
-        JsonPath responseForCheck = spec.get().jsonPath();
-        Assertions.assertEquals(0, responseForCheck.getInt("user_id"),
-                "user_id should be 0 for unauth request");
+        Response responseForCheck = spec.get().andReturn();
+        BaseAssertions.assertJsonByName(responseForCheck, lib.constant.Response.USER_ID, 0);
     }
 }

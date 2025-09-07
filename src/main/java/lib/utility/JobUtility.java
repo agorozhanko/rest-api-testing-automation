@@ -2,6 +2,7 @@ package lib.utility;
 
 import lib.constant.Constant;
 import io.restassured.path.json.JsonPath;
+import lib.constant.Response;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,11 +21,11 @@ public class JobUtility {
     }
 
     public static String getResult(JsonPath response) {
-        return response.get(Constant.RESULT);
+        return response.get(Response.RESULT);
     }
 
     public static String getStatus(JsonPath response) {
-        return response.get(Constant.STATUS);
+        return response.get(Response.STATUS);
     }
 
     public static void checkError(String responseError) {
@@ -36,14 +37,14 @@ public class JobUtility {
     }
 
     public static String getError(JsonPath response) {
-        return response.get(Constant.ERROR);
+        return response.get(Response.ERROR);
     }
 
     public static Integer workTimeCompletion(JsonPath response) {
-        return response.get(Constant.SECONDS);
+        return response.get(Response.SECONDS);
     }
 
     public static String getToken(JsonPath response) {
-        return response.get(Constant.TOKEN);
+        return response.get(Response.TOKEN);
     }
 }

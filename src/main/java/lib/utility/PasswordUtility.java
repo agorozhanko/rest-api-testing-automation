@@ -14,8 +14,8 @@ public class PasswordUtility {
         for (String password : passwordsList) {
             Response getSecretPasswordResponse = RestAssured
                     .given()
-                    .param(Constant.LOGIN, login)
-                    .param(Constant.PASSWORD, password)
+                    .param(lib.constant.Response.LOGIN, login)
+                    .param(lib.constant.Response.PASSWORD, password)
                     .when()
                     .post(URL.API_GET_SECRET_PASSWORD_HOMEWORK)
                     .andReturn();
@@ -24,7 +24,7 @@ public class PasswordUtility {
 
             Response checkAuthCookieResponse = RestAssured
                     .given()
-                    .cookie(Constant.AUTH_COOKIE, authCookie)
+                    .cookie(lib.constant.Response.AUTH_COOKIE, authCookie)
                     .when()
                     .post(URL.API_CHECK_AUTH_COOKIE)
                     .andReturn();

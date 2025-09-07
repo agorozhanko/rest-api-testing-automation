@@ -1,6 +1,5 @@
 package example;
 
-import lib.constant.Constant;
 import lib.constant.URL;
 import io.restassured.RestAssured;
 import io.restassured.http.Headers;
@@ -112,8 +111,8 @@ public class CreationSimpleRequestsTest {
     @Test()
     public void testRestAssuredCookies() {
         Map<String, String> data = new HashMap<>();
-        data.put(Constant.LOGIN, Constant.SECRET_LOGIN);
-        data.put(Constant.PASSWORD, Constant.SECRET_PASS);
+        data.put(lib.constant.Response.LOGIN, lib.constant.Response.SECRET_LOGIN);
+        data.put(lib.constant.Response.PASSWORD, lib.constant.Response.SECRET_PASS);
 
         Response response = RestAssured
                 .given()
@@ -140,8 +139,8 @@ public class CreationSimpleRequestsTest {
     @Test()
     public void testRestAssuredWrongCookies() {
         Map<String, String> data = new HashMap<>();
-        data.put(Constant.LOGIN, "secret_login2");
-        data.put(Constant.PASSWORD, "secret_pass2");
+        data.put(lib.constant.Response.LOGIN, "secret_login2");
+        data.put(lib.constant.Response.PASSWORD, "secret_pass2");
 
         Response response = RestAssured
                 .given()
@@ -168,8 +167,8 @@ public class CreationSimpleRequestsTest {
     @Test()
     public void testRestAssuredCookiesForCheck() {
         Map<String, String> data = new HashMap<>();
-        data.put(Constant.LOGIN, Constant.SECRET_LOGIN);
-        data.put(Constant.PASSWORD, Constant.SECRET_PASS);
+        data.put(lib.constant.Response.LOGIN, lib.constant.Response.SECRET_LOGIN);
+        data.put(lib.constant.Response.PASSWORD, lib.constant.Response.SECRET_PASS);
 
         Response response = RestAssured
                 .given()
@@ -182,7 +181,7 @@ public class CreationSimpleRequestsTest {
 
         Map<String, String> cookies = new HashMap<>();
         if (responseCookie != null) {
-            cookies.put(Constant.AUTH_COOKIE, responseCookie);
+            cookies.put(lib.constant.Response.AUTH_COOKIE, responseCookie);
         }
 
         Response responseForCheck = RestAssured
