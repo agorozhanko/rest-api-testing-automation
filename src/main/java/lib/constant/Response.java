@@ -19,4 +19,5 @@ public interface Response {
     String USER_ID = "user_id";
     String COOKIE = "cookie";
     String HEADERS = "headers";
+    String HOME_WORK = "HomeWork";
 }

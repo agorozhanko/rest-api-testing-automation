@@ -37,6 +37,10 @@ public class APIUtility {
         return getCookie(response, lib.constant.Response.AUTH_COOKIE);
     }
 
+    public static String getCookieHomeWork(Response response) {
+        return getCookie(response, lib.constant.Response.HOME_WORK);
+    }
+
     public static int getIntFromJson(Response response, String name) {
         response.then().assertThat().body("$", hasKey(name));
         return response.jsonPath().getInt(name);
