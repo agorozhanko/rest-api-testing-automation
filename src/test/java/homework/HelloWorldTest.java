@@ -1,8 +1,8 @@
 package homework;
 
-import lib.constant.URL;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import lib.constant.URL;
 import org.junit.jupiter.api.Test;
 
 public class HelloWorldTest {

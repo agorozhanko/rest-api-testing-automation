@@ -1,10 +1,10 @@
 package lib.utility;
 
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import lib.constant.Constant;
 import lib.constant.URL;
 import lib.exception.PasswordNotFoundException;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
 
 import java.util.List;
 

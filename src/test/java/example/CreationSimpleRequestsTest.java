@@ -1,12 +1,12 @@
 package example;
 
-import lib.constant.URL;
 import io.restassured.RestAssured;
 import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Test;
+import lib.constant.URL;
 import lib.utility.APIUtility;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
