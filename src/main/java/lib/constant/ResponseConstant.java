@@ -1,6 +1,6 @@
 package lib.constant;
 
-public interface Response {
+public interface ResponseConstant {
     String TOKEN = "token";
     String MESSAGES = "messages";
     String LOCATION = "Location";
@@ -25,4 +25,8 @@ public interface Response {
     String PLATFORM = "platform";
     String BROWSER = "browser";
     String DEVICE = "device";
+    String USERNAME = "username";
+    String FIRST_NAME = "firstName";
+    String LAST_NAME = "lastName";
+    String ID = "id";
 }

@@ -3,6 +3,7 @@ package lib.utility;
 import io.restassured.RestAssured;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
+import lib.constant.ResponseConstant;
 import lib.exception.TooManyAttemptsException;
 import org.junit.jupiter.api.Assertions;
 
@@ -24,11 +25,11 @@ public class APIUtility {
     }
 
     public static String getHeaderLocation(Response response) {
-        return getHeader(response, lib.constant.Response.LOCATION);
+        return getHeader(response, ResponseConstant.LOCATION);
     }
 
     public static String getHeaderXSecretHomeworkHeader(Response response) {
-        return getHeader(response, lib.constant.Response.X_SECRET_HOMEWORK_HEADER);
+        return getHeader(response, ResponseConstant.X_SECRET_HOMEWORK_HEADER);
     }
 
     public static String getCookie(Response response, String name) {
@@ -39,11 +40,11 @@ public class APIUtility {
     }
 
     public static String getAuthCookie(Response response) {
-        return getCookie(response, lib.constant.Response.AUTH_COOKIE);
+        return getCookie(response, ResponseConstant.AUTH_COOKIE);
     }
 
     public static String getCookieHomeWork(Response response) {
-        return getCookie(response, lib.constant.Response.HOME_WORK);
+        return getCookie(response, ResponseConstant.HOME_WORK);
     }
 
     public static int getIntFromJson(Response response, String name) {
@@ -52,7 +53,7 @@ public class APIUtility {
     }
 
     public static int getUserIdFromJson(Response response) {
-        return getIntFromJson(response, lib.constant.Response.USER_ID);
+        return getIntFromJson(response, ResponseConstant.USER_ID);
     }
 
     public static String getStringFromJson(Response response, String name) {
@@ -61,15 +62,15 @@ public class APIUtility {
     }
 
     public static String getPlatformFromJson(Response response) {
-        return getStringFromJson(response, lib.constant.Response.PLATFORM);
+        return getStringFromJson(response, ResponseConstant.PLATFORM);
     }
 
     public static String getBrowserFromJson(Response response) {
-        return getStringFromJson(response, lib.constant.Response.BROWSER);
+        return getStringFromJson(response, ResponseConstant.BROWSER);
     }
 
     public static String getDeviceFromJson(Response response) {
-        return getStringFromJson(response, lib.constant.Response.DEVICE);
+        return getStringFromJson(response, ResponseConstant.DEVICE);
     }
 
     public static int getRedirectCount(String url, int redirectLimit) {

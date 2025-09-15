@@ -2,6 +2,7 @@ package homework;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import lib.constant.ResponseConstant;
 import lib.constant.URL;
 import lib.enumeration.Browser;
 import lib.enumeration.Device;
@@ -25,7 +26,7 @@ public class UserAgentTest {
     public void testUserAgent(UserAgentHeader expectedUserAgentHeader) {
         Response response = RestAssured
                 .given()
-                .header(lib.constant.Response.USER_AGENT, expectedUserAgentHeader.getUserAgent())
+                .header(ResponseConstant.USER_AGENT, expectedUserAgentHeader.getUserAgent())
                 .get(URL.API_USER_AGENT_CHECK)
                 .andReturn();
 

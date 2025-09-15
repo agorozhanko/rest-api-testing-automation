@@ -6,4 +6,7 @@ public interface Constant {
     String READY_RESPONSE_RESULT = "42";
     String JOB_IS_NOT_READY = "Job is NOT ready";
     String YOU_ARE_AUTHORIZED = "You are authorized";
+    String LEARNQA = "learnqa";
+    String EMAIL_VINKOTOV = "vinkotov@example.com";
+    String TEST_PASSWORD = "1234";
 }

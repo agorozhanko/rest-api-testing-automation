@@ -5,6 +5,7 @@ import io.restassured.http.Header;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lib.constant.Constant;
+import lib.constant.ResponseConstant;
 import lib.constant.URL;
 import lib.utility.APIUtility;
 import lib.utility.JobUtility;
@@ -25,7 +26,7 @@ public class CreationSimpleRequestsTest {
                 .get(URL.API_GET_JSON_HOMEWORK)
                 .jsonPath();
 
-        List<Object> messagesList = response.getList(lib.constant.Response.MESSAGES);
+        List<Object> messagesList = response.getList(ResponseConstant.MESSAGES);
         System.out.println(messagesList.get(1));
     }
 
@@ -39,7 +40,7 @@ public class CreationSimpleRequestsTest {
                 .get(URL.API_LONG_REDIRECT)
                 .andReturn();
 
-        Header location = response.getHeaders().get(lib.constant.Response.LOCATION);
+        Header location = response.getHeaders().get(ResponseConstant.LOCATION);
         System.out.println(location);
     }
 
@@ -63,7 +64,7 @@ public class CreationSimpleRequestsTest {
         int seconds = JobUtility.workTimeCompletion(createTaskResponse);
 
         Map<String, String> params = new HashMap<>();
-        params.put(lib.constant.Response.TOKEN, token);
+        params.put(ResponseConstant.TOKEN, token);
 
         JsonPath jobProgressResponse = RestAssured
                 .given()

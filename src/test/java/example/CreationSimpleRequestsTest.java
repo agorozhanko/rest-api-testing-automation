@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import lib.constant.ResponseConstant;
 import lib.constant.URL;
 import lib.utility.APIUtility;
 import org.junit.jupiter.api.Test;
@@ -111,8 +112,8 @@ public class CreationSimpleRequestsTest {
     @Test()
     public void testRestAssuredCookies() {
         Map<String, String> data = new HashMap<>();
-        data.put(lib.constant.Response.LOGIN, lib.constant.Response.SECRET_LOGIN);
-        data.put(lib.constant.Response.PASSWORD, lib.constant.Response.SECRET_PASS);
+        data.put(ResponseConstant.LOGIN, ResponseConstant.SECRET_LOGIN);
+        data.put(ResponseConstant.PASSWORD, ResponseConstant.SECRET_PASS);
 
         Response response = RestAssured
                 .given()
@@ -139,8 +140,8 @@ public class CreationSimpleRequestsTest {
     @Test()
     public void testRestAssuredWrongCookies() {
         Map<String, String> data = new HashMap<>();
-        data.put(lib.constant.Response.LOGIN, "secret_login2");
-        data.put(lib.constant.Response.PASSWORD, "secret_pass2");
+        data.put(ResponseConstant.LOGIN, "secret_login2");
+        data.put(ResponseConstant.PASSWORD, "secret_pass2");
 
         Response response = RestAssured
                 .given()
@@ -167,8 +168,8 @@ public class CreationSimpleRequestsTest {
     @Test()
     public void testRestAssuredCookiesForCheck() {
         Map<String, String> data = new HashMap<>();
-        data.put(lib.constant.Response.LOGIN, lib.constant.Response.SECRET_LOGIN);
-        data.put(lib.constant.Response.PASSWORD, lib.constant.Response.SECRET_PASS);
+        data.put(ResponseConstant.LOGIN, ResponseConstant.SECRET_LOGIN);
+        data.put(ResponseConstant.PASSWORD, ResponseConstant.SECRET_PASS);
 
         Response response = RestAssured
                 .given()
@@ -181,7 +182,7 @@ public class CreationSimpleRequestsTest {
 
         Map<String, String> cookies = new HashMap<>();
         if (responseCookie != null) {
-            cookies.put(lib.constant.Response.AUTH_COOKIE, responseCookie);
+            cookies.put(ResponseConstant.AUTH_COOKIE, responseCookie);
         }
 
         Response responseForCheck = RestAssured

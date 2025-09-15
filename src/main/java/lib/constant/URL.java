@@ -21,4 +21,6 @@ public interface URL {
     String API_LONGTIME_JOB = BASE_AJAX_API_URL + "/longtime_job";
     String API_GET_SECRET_PASSWORD_HOMEWORK = BASE_AJAX_API_URL + "/get_secret_password_homework";
     String API_USER_AGENT_CHECK = BASE_AJAX_API_URL + "/user_agent_check";
+    String API_USER = BASE_API_URL + "/user/";
+    String HTTPS_PLAYGROUND_LEARNQA_RU_API_USER_2 = "https://playground.learnqa.ru/api/user/2";
 }
