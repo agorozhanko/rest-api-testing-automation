@@ -1,14 +1,17 @@
 package example;
 
-import io.restassured.RestAssured;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import lib.ApiCoreRequests;
 import lib.assertions.Assertions;
 import lib.constant.Constant;
 import lib.constant.ResponseConstant;
 import lib.constant.URL;
 import lib.utility.APIUtility;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,10 +19,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.HashMap;
 import java.util.Map;
 
+@Epic("Authorisation cases")
+@Feature("Authorisation")
 public class UserAuthTest {
     String cookie;
     String header;
     int userIdOnAuth;
+    private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
     @BeforeEach
     public void loginUser() {
@@ -27,11 +33,7 @@ public class UserAuthTest {
         authData.put(ResponseConstant.EMAIL, Constant.EMAIL_VINKOTOV);
         authData.put(ResponseConstant.PASSWORD, Constant.TEST_PASSWORD);
 
-        Response responseGetAuth = RestAssured
-                .given()
-                .body(authData)
-                .post(URL.API_USER_LOGIN)
-                .andReturn();
+        Response responseGetAuth = apiCoreRequests.makePostRequest(URL.API_USER_LOGIN, authData);
 
         cookie = APIUtility.getCookie(responseGetAuth, ResponseConstant.AUTH_SID);
         header = APIUtility.getHeader(responseGetAuth, ResponseConstant.X_CSRF_TOKEN);
@@ -39,32 +41,27 @@ public class UserAuthTest {
     }
 
     @Test
+    @Description("This test successfully authorize user by email and password")
+    @DisplayName("Test positive auth user")
     public void testAuthUser() {
-        Response responseCheckAuth = RestAssured
-                .given()
-                .header(ResponseConstant.X_CSRF_TOKEN, header)
-                .cookie(ResponseConstant.AUTH_SID, cookie)
-                .get(URL.API_USER_AUTH)
-                .andReturn();
+        Response responseCheckAuth = apiCoreRequests.makeGetRequest(URL.API_USER_AUTH, header, cookie);
 
         Assertions.assertJsonByName(responseCheckAuth, ResponseConstant.USER_ID, userIdOnAuth);
     }
 
+    @Description("This test check authorization status w/o sending auth cookie or token")
+    @DisplayName("Test negative auth user")
     @ParameterizedTest
     @ValueSource(strings = {ResponseConstant.COOKIE, ResponseConstant.HEADERS})
     public void testNegativeAuthUser(String condition) {
-        RequestSpecification spec = RestAssured.given();
-        spec.baseUri(URL.API_USER_AUTH);
-
         if (condition.equals(ResponseConstant.COOKIE)) {
-            spec.cookie(ResponseConstant.AUTH_SID, cookie);
+            Response responseForCheck = apiCoreRequests.makeGetRequestWithCookie(URL.API_USER_AUTH, cookie);
+            Assertions.assertJsonByName(responseForCheck, ResponseConstant.USER_ID, 0);
         } else if (condition.equals(ResponseConstant.HEADERS)) {
-            spec.header(ResponseConstant.X_CSRF_TOKEN, header);
+            Response responseForCheck = apiCoreRequests.makeGetRequestWithToken(URL.API_USER_AUTH, header);
+            Assertions.assertJsonByName(responseForCheck, ResponseConstant.USER_ID, 0);
         } else {
             throw new IllegalArgumentException(String.format("Condition value is known: '%s'", condition));
         }
-
-        Response responseForCheck = spec.get().andReturn();
-        Assertions.assertJsonByName(responseForCheck, ResponseConstant.USER_ID, 0);
     }
 }
