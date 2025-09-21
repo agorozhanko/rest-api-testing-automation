@@ -55,7 +55,7 @@ public class UserRegisterTest {
     @DisplayName("Create user with invalid email - without @")
     public void testCreateUserWithInvalidEmail() {
         Map<String, String> userData = new HashMap<>();
-        userData.put(ResponseConstant.EMAIL, "invalidemail.com");
+        userData.put(ResponseConstant.EMAIL, Constant.INVALID_EMAIL);
         userData = DataGenerator.getRegistrationData(userData);
 
         Response responseCreateAuth = apiCoreRequests.makePostRequest(URL.API_USER, userData);

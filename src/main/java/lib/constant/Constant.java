@@ -9,4 +9,7 @@ public interface Constant {
     String LEARNQA = "learnqa";
     String EMAIL_VINKOTOV = "vinkotov@example.com";
     String TEST_PASSWORD = "1234";
+    String[] unexpectedFields =
+            {ResponseConstant.FIRST_NAME, ResponseConstant.LAST_NAME, ResponseConstant.EMAIL};
+    String INVALID_EMAIL = "invalidemail.com";
 }

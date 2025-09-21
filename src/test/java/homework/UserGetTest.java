@@ -20,8 +20,6 @@ import java.util.Map;
 @Feature("Get User")
 public class UserGetTest extends BaseTest {
 
-    private final String[] unexpectedFields = {ResponseConstant.FIRST_NAME, ResponseConstant.LAST_NAME, ResponseConstant.EMAIL};
-
     @Test
     @DisplayName("Get user data no auth")
     @Description("Unauthorized request for data")
@@ -29,7 +27,7 @@ public class UserGetTest extends BaseTest {
         Response responseUserData = apiCoreRequests.makeGetRequest(URL.HTTPS_PLAYGROUND_LEARNQA_RU_API_USER_2);
 
         Assertions.assertJsonHasField(responseUserData, ResponseConstant.USERNAME);
-        Assertions.assertJsonHasNotFields(responseUserData, unexpectedFields);
+        Assertions.assertJsonHasNotFields(responseUserData, Constant.unexpectedFields);
     }
 
     @Test
@@ -71,6 +69,6 @@ public class UserGetTest extends BaseTest {
                 apiCoreRequests.makeGetRequest(String.format(URL.API_USER + 1), header, cookie);
 
         Assertions.assertJsonHasField(responseUserData, ResponseConstant.USERNAME);
-        Assertions.assertJsonHasNotFields(responseUserData, unexpectedFields);
+        Assertions.assertJsonHasNotFields(responseUserData, Constant.unexpectedFields);
     }
 }

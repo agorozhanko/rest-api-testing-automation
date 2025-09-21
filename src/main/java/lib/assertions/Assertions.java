@@ -21,6 +21,10 @@ public class Assertions extends org.junit.jupiter.api.Assertions {
         assertEquals(expectedValue, value, "JSON value is not equal to expected value");
     }
 
+    public static void assertJsonError(Response response, String expectedValue) {
+        assertJsonByName(response, "error", expectedValue);
+    }
+
     public static void assertResponseTextEquals(Response response, String expectedAnswer) {
         assertEquals(
                 expectedAnswer,
