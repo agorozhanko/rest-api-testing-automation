@@ -1,8 +1,6 @@
 package example;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.core.ApiCoreRequests;
 import lib.assertions.Assertions;
@@ -12,6 +10,7 @@ import lib.constant.URL;
 import lib.utility.APIUtility;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -41,8 +40,11 @@ public class UserAuthTest {
     }
 
     @Test
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     @Description("This test successfully authorize user by email and password")
     @DisplayName("Test positive auth user")
+    @Issue("Ex14: Формирование фреймворка")
     public void testAuthUser() {
         Response responseCheckAuth = apiCoreRequests.makeGetRequest(URL.API_USER_AUTH, header, cookie);
 
@@ -53,6 +55,9 @@ public class UserAuthTest {
     @DisplayName("Test negative auth user")
     @ParameterizedTest
     @ValueSource(strings = {ResponseConstant.COOKIE, ResponseConstant.HEADERS})
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
+    @Issue("Ex14: Формирование фреймворка")
     public void testNegativeAuthUser(String condition) {
         if (condition.equals(ResponseConstant.COOKIE)) {
             Response responseForCheck = apiCoreRequests.makeGetRequestWithCookie(URL.API_USER_AUTH, cookie);

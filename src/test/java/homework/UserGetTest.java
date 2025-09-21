@@ -4,6 +4,7 @@ import base.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import lib.assertions.Assertions;
 import lib.constant.Constant;
@@ -11,6 +12,7 @@ import lib.constant.ResponseConstant;
 import lib.constant.URL;
 import lib.utility.APIUtility;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -21,6 +23,7 @@ import java.util.Map;
 public class UserGetTest extends BaseTest {
 
     @Test
+    @Tag("Get User")
     @DisplayName("Get user data no auth")
     @Description("Unauthorized request for data")
     public void testGetUserDataNoAuth() {
@@ -31,6 +34,7 @@ public class UserGetTest extends BaseTest {
     }
 
     @Test
+    @Tag("Get User")
     @DisplayName("Get user details from the same user")
     @Description("Authorization by user with ID = 2 and a request to obtain data from the same user")
     public void testGetUserDetailsAuthAsSameUser() {
@@ -53,8 +57,10 @@ public class UserGetTest extends BaseTest {
     }
 
     @Test
+    @Tag("Get User")
     @DisplayName("Get user details from the another user")
     @Description("Authorization by user with ID = 2 and a request to obtain data from user with ID = 1")
+    @Issue("Ex16: Запрос данных другого пользователя")
     public void testGetUserDetailsAuthAsAnotherUser() {
         Map<String, String> authData = new HashMap<>();
         authData.put(ResponseConstant.EMAIL, Constant.EMAIL_VINKOTOV);

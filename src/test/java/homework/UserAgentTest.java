@@ -1,5 +1,6 @@
 package homework;
 
+import io.qameta.allure.Issue;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lib.constant.ResponseConstant;
@@ -11,6 +12,7 @@ import lib.model.UserAgentHeader;
 import lib.utility.APIUtility;
 import lib.utility.UserAgentUtility;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -23,6 +25,8 @@ public class UserAgentTest {
 
     @ParameterizedTest
     @MethodSource("userAgentProvider")
+    @Tag("UserAgent")
+    @Issue("Ex13: User Agent")
     public void testUserAgent(UserAgentHeader expectedUserAgentHeader) {
         Response response = RestAssured
                 .given()

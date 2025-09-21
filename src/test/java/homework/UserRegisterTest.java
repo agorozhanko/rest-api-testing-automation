@@ -1,7 +1,6 @@
 package homework;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.assertions.Assertions;
 import lib.constant.Constant;
@@ -10,6 +9,7 @@ import lib.constant.URL;
 import lib.core.ApiCoreRequests;
 import lib.utility.DataGenerator;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,7 +24,10 @@ public class UserRegisterTest {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
     @Test
+    @Tag("Registration")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Create user with existing email")
+    @Issue("Ex15: Тесты на метод user")
     public void testCreateUserWithExistingEmail() {
         String email = Constant.EMAIL_VINKOTOV;
 
@@ -41,7 +44,10 @@ public class UserRegisterTest {
     }
 
     @Test
+    @Tag("Registration")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Create user successfully")
+    @Issue("Ex15: Тесты на метод user")
     public void testCreateUserSuccessfully() {
         Map<String, String> userData = DataGenerator.getRegistrationData();
 
@@ -52,7 +58,10 @@ public class UserRegisterTest {
     }
 
     @Test
+    @Tag("Registration")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Create user with invalid email - without @")
+    @Issue("Ex15: Тесты на метод user")
     public void testCreateUserWithInvalidEmail() {
         Map<String, String> userData = new HashMap<>();
         userData.put(ResponseConstant.EMAIL, Constant.INVALID_EMAIL);
@@ -66,7 +75,10 @@ public class UserRegisterTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"email", "password", "username", "firstName", "lastName"})
+    @Tag("Registration")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Create user without one of the required fields")
+    @Issue("Ex15: Тесты на метод user")
     public void testCreateUserWithoutRequiredField(String missingField) {
         Map<String, String> userData = DataGenerator.getRegistrationData();
         userData.remove(missingField);
@@ -80,7 +92,9 @@ public class UserRegisterTest {
     }
 
     @Test
+    @Tag("Registration")
     @DisplayName("Create user with short username")
+    @Issue("Ex15: Тесты на метод user")
     public void testCreateUserWithShortUsername() {
         String shortUsername = DataGenerator.generateRandomString(1);
 
@@ -95,7 +109,9 @@ public class UserRegisterTest {
     }
 
     @Test
+    @Tag("Registration")
     @DisplayName("Create user with long username")
+    @Issue("Ex15: Тесты на метод user")
     public void testCreateUserWithLongUsername() {
         String longUsername = DataGenerator.generateRandomString(251);
 

@@ -1,5 +1,7 @@
 package example;
 
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.restassured.RestAssured;
 import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
@@ -7,6 +9,7 @@ import io.restassured.response.Response;
 import lib.constant.ResponseConstant;
 import lib.constant.URL;
 import lib.utility.APIUtility;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -15,6 +18,8 @@ import java.util.Map;
 public class CreationSimpleRequestsTest {
 
     @Test()
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     public void testRestAssured() {
         Map<String, String> params = new HashMap<>();
         params.put("name", "John");
@@ -35,6 +40,8 @@ public class CreationSimpleRequestsTest {
     }
 
     @Test()
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     public void testRestAssuredParams() {
         Map<String, Object> body = new HashMap<>();
         body.put("param1", "value1");
@@ -49,6 +56,8 @@ public class CreationSimpleRequestsTest {
     }
 
     @Test()
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     public void testRestAssuredStatusCode200() {
         Response response = RestAssured
                 .get(URL.API_CHECK_TYPE)
@@ -58,6 +67,8 @@ public class CreationSimpleRequestsTest {
     }
 
     @Test()
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     public void testRestAssuredStatusCode303() {
         Response response = RestAssured
                 .given()
@@ -71,6 +82,8 @@ public class CreationSimpleRequestsTest {
     }
 
     @Test()
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     public void testRestAssuredStatusCode400() {
         Response response = RestAssured
                 .get(URL.API_SOMETHING)
@@ -81,6 +94,8 @@ public class CreationSimpleRequestsTest {
     }
 
     @Test()
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     public void testRestAssuredStatusCode500() {
         Response response = RestAssured
                 .get(URL.API_GET_500)
@@ -91,6 +106,8 @@ public class CreationSimpleRequestsTest {
     }
 
     @Test()
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     public void testRestAssuredShowHeaders() {
         Map<String, Object> headers = new HashMap<>();
         headers.put("myHeader1", "myValue1");
@@ -110,6 +127,8 @@ public class CreationSimpleRequestsTest {
     }
 
     @Test()
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     public void testRestAssuredCookies() {
         Map<String, String> data = new HashMap<>();
         data.put(ResponseConstant.LOGIN, ResponseConstant.SECRET_LOGIN);
@@ -138,6 +157,8 @@ public class CreationSimpleRequestsTest {
     }
 
     @Test()
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     public void testRestAssuredWrongCookies() {
         Map<String, String> data = new HashMap<>();
         data.put(ResponseConstant.LOGIN, "secret_login2");
@@ -166,6 +187,8 @@ public class CreationSimpleRequestsTest {
     }
 
     @Test()
+    @Tag("Lessons")
+    @Severity(SeverityLevel.MINOR)
     public void testRestAssuredCookiesForCheck() {
         Map<String, String> data = new HashMap<>();
         data.put(ResponseConstant.LOGIN, ResponseConstant.SECRET_LOGIN);

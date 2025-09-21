@@ -1,9 +1,7 @@
 package homework.edition;
 
 import base.BaseTest;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lib.assertions.Assertions;
@@ -14,6 +12,7 @@ import lib.utility.APIUtility;
 import lib.utility.DataGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -46,11 +45,14 @@ public class AuthorizedUserEditTest extends BaseTest {
     }
 
     @Test
+    @Tag("Edition")
+    @Severity(SeverityLevel.CRITICAL)
     @Description("- generate user" +
             "- login " +
             "- edit user" +
             "- check user data after edition")
     @DisplayName("Edit just created user")
+    @Issue("Ex17: Негативные тесты на PUT")
     public void testEditJustCreatedUser() {
         //EDIT
         String newName = "Changed Name";
@@ -73,8 +75,11 @@ public class AuthorizedUserEditTest extends BaseTest {
     }
 
     @Test
+    @Tag("Edition")
+    @Severity(SeverityLevel.CRITICAL)
     @Description("Change user data while logged in as another user")
     @DisplayName("Edit another user")
+    @Issue("Ex17: Негативные тесты на PUT")
     public void testEditAnotherUser() {
         Map<String, String> userDataForEdition = DataGenerator.getRegistrationData();
 
@@ -96,8 +101,11 @@ public class AuthorizedUserEditTest extends BaseTest {
     }
 
     @Test
+    @Tag("Edition")
+    @Severity(SeverityLevel.CRITICAL)
     @Description("Edit 'firstName' of a user, while logged in by the same user, to a very short value of one character")
     @DisplayName("Edit user name with small value")
+    @Issue("Ex17: Негативные тесты на PUT")
     public void testEditUserNameWithSmallValue() {
         //EDIT
         String newName = DataGenerator.generateRandomString(1);
@@ -122,8 +130,11 @@ public class AuthorizedUserEditTest extends BaseTest {
     }
 
     @Test
+    @Tag("Edition")
+    @Severity(SeverityLevel.CRITICAL)
     @Description("Edit a user's email while logged in as the same user to a new email without the '@' symbol")
     @DisplayName("Edit user email with invalid value")
+    @Issue("Ex17: Негативные тесты на PUT")
     public void testEditEmailUserWithInvalidValue() {
         //EDIT
         String newEmail = Constant.INVALID_EMAIL;

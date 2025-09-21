@@ -1,9 +1,7 @@
 package homework;
 
 import base.BaseTest;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lib.assertions.Assertions;
@@ -12,10 +10,7 @@ import lib.constant.ResponseConstant;
 import lib.constant.URL;
 import lib.utility.APIUtility;
 import lib.utility.DataGenerator;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,8 +49,11 @@ public class UserDeleteTest extends BaseTest {
     }
 
     @Test
+    @Tag("Deletion")
+    @Severity(SeverityLevel.BLOCKER)
     @Description("Try to delete user by ID 2. Make sure that the system will not allow you to delete this user.")
     @DisplayName("Delete undeletable user")
+    @Issue("Ex18: Тесты на DELETE")
     public void deleteUserWithId2() {
         Response responseGetAuth = apiCoreRequests.makePostRequest(URL.API_USER_LOGIN, authDataUser2);
 
@@ -68,9 +66,12 @@ public class UserDeleteTest extends BaseTest {
     }
 
     @Test
+    @Tag("Deletion")
+    @Severity(SeverityLevel.BLOCKER)
     @Description("Create a user. Log in as them. Delete them, then try to get their data by ID " +
             "and make sure that the user has actually been deleted.")
     @DisplayName("Delete user")
+    @Issue("Ex18: Тесты на DELETE")
     public void deleteUser() {
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -101,8 +102,11 @@ public class UserDeleteTest extends BaseTest {
     }
 
     @Test
+    @Tag("Deletion")
+    @Severity(SeverityLevel.BLOCKER)
     @Description("Try to delete a user while being logged in as another user.")
     @DisplayName("Delete another user")
+    @Issue("Ex18: Тесты на DELETE")
     public void deleteAnotherUser() {
         //GENERATE USER
         JsonPath responseCreateAuth = apiCoreRequests.makePostRequest(URL.API_USER, userDataForDeletion).jsonPath();
