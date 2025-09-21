@@ -4,7 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.restassured.response.Response;
-import lib.ApiCoreRequests;
+import lib.core.ApiCoreRequests;
 import lib.assertions.Assertions;
 import lib.constant.Constant;
 import lib.constant.ResponseConstant;

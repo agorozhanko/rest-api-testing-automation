@@ -36,6 +36,14 @@ public class Assertions extends org.junit.jupiter.api.Assertions {
         );
     }
 
+    public static void assertResponseCode200(Response response) {
+        assertResponseCodeEquals(response, 200);
+    }
+
+    public static void assertResponseCode400(Response response) {
+        assertResponseCodeEquals(response, 400);
+    }
+
     public static void assertJsonHasField(Response response, String expectedFieldName) {
         response.then().assertThat().body("$", hasKey(expectedFieldName));
     }

@@ -1,4 +1,4 @@
-package lib;
+package lib.core;
 
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
