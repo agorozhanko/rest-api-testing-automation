@@ -1,4 +1,4 @@
-package example;
+package homework;
 
 import base.BaseTest;
 import io.qameta.allure.Description;
@@ -20,7 +20,7 @@ import java.util.Map;
 @Feature("Get User")
 public class UserGetTest extends BaseTest {
 
-    private String[] unexpectedFields = {ResponseConstant.FIRST_NAME, ResponseConstant.LAST_NAME, ResponseConstant.EMAIL};
+    private final String[] unexpectedFields = {ResponseConstant.FIRST_NAME, ResponseConstant.LAST_NAME, ResponseConstant.EMAIL};
 
     @Test
     @DisplayName("Get user data no auth")
