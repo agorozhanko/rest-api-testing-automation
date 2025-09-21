@@ -75,4 +75,14 @@ public class ApiCoreRequests {
                 .put(url)
                 .andReturn();
     }
+
+    @Step("Make a PUT-request with token and auth cookie")
+    public Response makeDeleteRequest(String url,  String token, String cookie) {
+        return given()
+                .filter(new AllureRestAssured())
+                .header(new Header(ResponseConstant.X_CSRF_TOKEN, token))
+                .cookie(ResponseConstant.AUTH_SID, cookie)
+                .delete(url)
+                .andReturn();
+    }
 }

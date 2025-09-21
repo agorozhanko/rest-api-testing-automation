@@ -12,4 +12,5 @@ public interface Constant {
     String[] unexpectedFields =
             {ResponseConstant.FIRST_NAME, ResponseConstant.LAST_NAME, ResponseConstant.EMAIL};
     String INVALID_EMAIL = "invalidemail.com";
+    int USER_ID_2 = 2;
 }
