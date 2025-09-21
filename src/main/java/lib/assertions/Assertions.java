@@ -1,5 +1,6 @@
 package lib.assertions;
 
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import static org.hamcrest.Matchers.hasKey;
@@ -53,8 +54,15 @@ public class Assertions extends org.junit.jupiter.api.Assertions {
             assertJsonHasField(response, expectedFieldName);
     }
 
+    @Step("Response has not field: {1}")
     public static void assertJsonHasNotField(Response response, String unexpectedFieldName) {
         response.then().assertThat().body("$", not(hasKey(unexpectedFieldName)));
+    }
+
+    @Step("Response has not fields: {1}")
+    public static void assertJsonHasNotFields(Response response, String... unexpectedFieldNames) {
+        for (String unexpectedFieldName : unexpectedFieldNames)
+            assertJsonHasNotField(response, unexpectedFieldName);
     }
 
 }
