@@ -1,10 +1,13 @@
 package lib.utility;
 
+import io.qameta.allure.Step;
 import lib.model.UserAgentHeader;
 
 import java.util.List;
 
 public class UserAgentUtility {
+
+    @Step("Generate error text.")
     public static void generateErrorText(UserAgentHeader expectedUserAgentHeader, UserAgentHeader actualUserAgentHeader, List<String> errors) {
         boolean hasError = false;
         StringBuilder errorMessage = new StringBuilder("User Agent: " + expectedUserAgentHeader.getUserAgent() + "\n");
@@ -30,6 +33,7 @@ public class UserAgentUtility {
         }
     }
 
+    @Step("Print error text.")
     public static void printError(List<String> errors) {
         if (errors.isEmpty()) {
             System.out.println("All User Agents are correct.");

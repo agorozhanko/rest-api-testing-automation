@@ -1,5 +1,6 @@
 package lib.utility;
 
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lib.constant.Constant;
@@ -10,6 +11,8 @@ import lib.exception.PasswordNotFoundException;
 import java.util.List;
 
 public class PasswordUtility {
+
+    @Step("Password guessing.")
     public static String passwordSelection(String login, List<String> passwordsList) {
 
         for (String password : passwordsList) {

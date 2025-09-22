@@ -5,9 +5,9 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import lib.assertions.StringAssertions;
 import lib.constant.URL;
 import lib.utility.APIUtility;
-import lib.utility.StringUtility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class WritingTests {
     @Severity(SeverityLevel.MINOR)
     @Issue("Ex10: Тест на короткую фразу")
     public void testShortPhraseMoreThan15symbols(String phrase) {
-        Assertions.assertTrue(StringUtility.phraseLengthMoreThan15symbols(phrase),
+        Assertions.assertTrue(StringAssertions.phraseLengthMoreThan15symbols(phrase),
                 " Phrase length must be more than 15 symbols");
     }
 
@@ -32,7 +32,7 @@ public class WritingTests {
     @Severity(SeverityLevel.MINOR)
     @Issue("Ex10: Тест на короткую фразу")
     public void testShortPhraseLessThan15symbols(String phrase) {
-        Assertions.assertFalse(StringUtility.phraseLengthMoreThan15symbols(phrase),
+        Assertions.assertFalse(StringAssertions.phraseLengthMoreThan15symbols(phrase),
                 " Phrase length must be less than 15 symbols");
     }
 
@@ -41,7 +41,7 @@ public class WritingTests {
     @Severity(SeverityLevel.MINOR)
     @Issue("Ex10: Тест на короткую фразу")
     public void testShortPhraseNull() {
-        Assertions.assertThrows(NullPointerException.class, () -> StringUtility.phraseLengthMoreThan15symbols(null));
+        Assertions.assertThrows(NullPointerException.class, () -> StringAssertions.phraseLengthMoreThan15symbols(null));
     }
 
     @Test

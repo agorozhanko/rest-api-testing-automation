@@ -25,7 +25,7 @@ public class UserGetTest extends BaseTest {
     @Test
     @Tag("Get User")
     @DisplayName("Get user data no auth")
-    @Description("Unauthorized request for data")
+    @Description("Unauthorized request for data.")
     public void testGetUserDataNoAuth() {
         Response responseUserData = apiCoreRequests.makeGetRequest(URL.HTTPS_PLAYGROUND_LEARNQA_RU_API_USER_2);
 
@@ -36,7 +36,7 @@ public class UserGetTest extends BaseTest {
     @Test
     @Tag("Get User")
     @DisplayName("Get user details from the same user")
-    @Description("Authorization by user with ID = 2 and a request to obtain data from the same user")
+    @Description("Authorization by user with ID = 2 and a request to obtain data from the same user.")
     public void testGetUserDetailsAuthAsSameUser() {
         Map<String, String> authData = new HashMap<>();
         authData.put(ResponseConstant.EMAIL, Constant.EMAIL_VINKOTOV);
@@ -59,7 +59,7 @@ public class UserGetTest extends BaseTest {
     @Test
     @Tag("Get User")
     @DisplayName("Get user details from the another user")
-    @Description("Authorization by user with ID = 2 and a request to obtain data from user with ID = 1")
+    @Description("Authorization by user with ID = 2 and a request to obtain data from user with ID = 1.")
     @Issue("Ex16: Запрос данных другого пользователя")
     public void testGetUserDetailsAuthAsAnotherUser() {
         Map<String, String> authData = new HashMap<>();

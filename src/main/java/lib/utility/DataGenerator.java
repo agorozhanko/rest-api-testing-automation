@@ -11,12 +11,13 @@ import java.util.Random;
 
 public class DataGenerator {
 
+    @Step("Generate random email.")
     public static String getRandomEmail() {
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
         return String.format("learnqa%s@example.com", timestamp);
     }
 
-    @Step("Generate random string with length {0}")
+    @Step("Generate random string with length {0}.")
     public static String generateRandomString(int length) {
         String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
@@ -33,7 +34,7 @@ public class DataGenerator {
         return sb.toString();
     }
 
-
+    @Step("Get registration data by default for create user.")
     public static Map<String, String> getRegistrationData() {
         Map<String, String> data = new HashMap<>();
         data.put(ResponseConstant.EMAIL, DataGenerator.getRandomEmail());
@@ -45,6 +46,7 @@ public class DataGenerator {
         return data;
     }
 
+    @Step("Get registration non default data for create user.")
     public static Map<String, String> getRegistrationData(Map<String, String> nonDefaultValues) {
         Map<String, String> defaultValues = DataGenerator.getRegistrationData();
         Map<String, String> userData = new HashMap<>();

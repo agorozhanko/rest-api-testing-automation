@@ -38,7 +38,7 @@ public class UnauthorizedUserEditTest extends BaseTest {
 
     @Test
     @Tag("Edition")
-    @Description("Edit user data without authorization")
+    @Description("Edit user data without authorization.")
     @DisplayName("Edit unauthorized user")
     @Issue("Ex17: Негативные тесты на PUT")
     public void testEditUnauthorizedUser() {

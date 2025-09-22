@@ -6,6 +6,6 @@ public class PasswordNotFoundException extends NullPointerException {
     }
 
     public PasswordNotFoundException() {
-        super("Пароль не найден среди введённых паролей");
+        super("Пароль не найден среди введённых паролей.");
     }
 }

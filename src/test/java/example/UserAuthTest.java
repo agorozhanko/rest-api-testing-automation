@@ -2,11 +2,11 @@ package example;
 
 import io.qameta.allure.*;
 import io.restassured.response.Response;
-import lib.core.ApiCoreRequests;
 import lib.assertions.Assertions;
 import lib.constant.Constant;
 import lib.constant.ResponseConstant;
 import lib.constant.URL;
+import lib.core.ApiCoreRequests;
 import lib.utility.APIUtility;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,7 +42,7 @@ public class UserAuthTest {
     @Test
     @Tag("Lessons")
     @Severity(SeverityLevel.MINOR)
-    @Description("This test successfully authorize user by email and password")
+    @Description("This test successfully authorize user by email and password.")
     @DisplayName("Test positive auth user")
     @Issue("Ex14: Формирование фреймворка")
     public void testAuthUser() {
@@ -51,7 +51,7 @@ public class UserAuthTest {
         Assertions.assertJsonByName(responseCheckAuth, ResponseConstant.USER_ID, userIdOnAuth);
     }
 
-    @Description("This test check authorization status w/o sending auth cookie or token")
+    @Description("This test check authorization status w/o sending auth cookie or token.")
     @DisplayName("Test negative auth user")
     @ParameterizedTest
     @ValueSource(strings = {ResponseConstant.COOKIE, ResponseConstant.HEADERS})

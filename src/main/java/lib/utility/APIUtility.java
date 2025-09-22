@@ -1,5 +1,6 @@
 package lib.utility;
 
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
@@ -13,10 +14,12 @@ import static org.hamcrest.Matchers.hasKey;
 
 public class APIUtility {
 
+    @Step("Get status code.")
     public static int getStatusCode(Response response) {
         return response.getStatusCode();
     }
 
+    @Step("Get header by name: {1}.")
     public static String getHeader(Response response, String name) {
         Headers headers = response.getHeaders();
 
@@ -32,6 +35,7 @@ public class APIUtility {
         return getHeader(response, ResponseConstant.X_SECRET_HOMEWORK_HEADER);
     }
 
+    @Step("Get cookie by name: {1}.")
     public static String getCookie(Response response, String name) {
         Map<String, String> cookies = response.getCookies();
 
@@ -52,6 +56,7 @@ public class APIUtility {
         return response.jsonPath().getInt(name);
     }
 
+    @Step("Get 'user_id' from Json.")
     public static int getUserIdFromJson(Response response) {
         return getIntFromJson(response, ResponseConstant.USER_ID);
     }
@@ -61,18 +66,22 @@ public class APIUtility {
         return response.jsonPath().getString(name);
     }
 
+    @Step("Get 'platform' from Json.")
     public static String getPlatformFromJson(Response response) {
         return getStringFromJson(response, ResponseConstant.PLATFORM);
     }
 
+    @Step("Get 'browser' from Json.")
     public static String getBrowserFromJson(Response response) {
         return getStringFromJson(response, ResponseConstant.BROWSER);
     }
 
+    @Step("Get 'device' from Json.")
     public static String getDeviceFromJson(Response response) {
         return getStringFromJson(response, ResponseConstant.DEVICE);
     }
 
+    @Step("Get redirect count.")
     public static int getRedirectCount(String url, int redirectLimit) {
         Response response;
         String location;
@@ -91,7 +100,7 @@ public class APIUtility {
                     throw new TooManyAttemptsException("Redirects limit exceeded!");
                 }
             } else {
-                throw new IllegalStateException("Something went wrong. Unexpected Status Code");
+                throw new IllegalStateException("Something went wrong. Unexpected Status Code.");
             }
         }
         return redirectCount;

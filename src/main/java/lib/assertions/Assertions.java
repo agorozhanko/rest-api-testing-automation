@@ -21,6 +21,7 @@ public class Assertions extends org.junit.jupiter.api.Assertions {
         assertEquals(expectedValue, value, "JSON value is not equal to expected value");
     }
 
+    @Step("Check error. Text must be: {1}.")
     public static void assertJsonError(Response response, String expectedValue) {
         assertJsonByName(response, "error", expectedValue);
     }
@@ -41,29 +42,33 @@ public class Assertions extends org.junit.jupiter.api.Assertions {
         );
     }
 
+    @Step("Check response code is 200.")
     public static void assertResponseCode200(Response response) {
         assertResponseCodeEquals(response, 200);
     }
 
+    @Step("Check response code is 400.")
     public static void assertResponseCode400(Response response) {
         assertResponseCodeEquals(response, 400);
     }
 
+    @Step("Response has field: {1}.")
     public static void assertJsonHasField(Response response, String expectedFieldName) {
         response.then().assertThat().body("$", hasKey(expectedFieldName));
     }
 
+    @Step("Response has fields: {1}.")
     public static void assertJsonHasFields(Response response, String... expectedFieldNames) {
         for (String expectedFieldName : expectedFieldNames)
             assertJsonHasField(response, expectedFieldName);
     }
 
-    @Step("Response has not field: {1}")
+    @Step("Response has not field: {1}.")
     public static void assertJsonHasNotField(Response response, String unexpectedFieldName) {
         response.then().assertThat().body("$", not(hasKey(unexpectedFieldName)));
     }
 
-    @Step("Response has not fields: {1}")
+    @Step("Response has not fields: {1}.")
     public static void assertJsonHasNotFields(Response response, String... unexpectedFieldNames) {
         for (String unexpectedFieldName : unexpectedFieldNames)
             assertJsonHasNotField(response, unexpectedFieldName);

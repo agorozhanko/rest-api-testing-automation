@@ -11,7 +11,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class ApiCoreRequests {
-    @Step("Make a GET-request {0}")
+    @Step("Make a GET-request {0}.")
     public Response makeGetRequest(String url) {
         return given()
                 .filter(new AllureRestAssured())
@@ -19,7 +19,7 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
-    @Step("Make a GET-request with token and auth cookie")
+    @Step("Make a GET-request with token and auth cookie.")
     public Response makeGetRequest(String url, String token, String cookie) {
         return given()
                 .filter(new AllureRestAssured())
@@ -29,7 +29,7 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
-    @Step("Make a GET-request with auth cookie only")
+    @Step("Make a GET-request with auth cookie only.")
     public Response makeGetRequestWithCookie(String url, String cookie) {
         return given()
                 .filter(new AllureRestAssured())
@@ -38,7 +38,7 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
-    @Step("Make a GET-request with token only")
+    @Step("Make a GET-request with token only.")
     public Response makeGetRequestWithToken(String url, String token) {
         return given()
                 .filter(new AllureRestAssured())
@@ -47,7 +47,7 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
-    @Step("Make a POST-request")
+    @Step("Make a POST-request.")
     public Response makePostRequest(String url, Map<String, String> authData) {
         return given()
                 .filter(new AllureRestAssured())
@@ -56,7 +56,7 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
-    @Step("Make a PUT-request with body, token and auth cookie")
+    @Step("Make a PUT-request with body, token and auth cookie.")
     public Response makePutRequest(String url, Map<String, String> editData, String token, String cookie) {
         return given()
                 .filter(new AllureRestAssured())
@@ -67,7 +67,7 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
-    @Step("Make a PUT-request with body")
+    @Step("Make a PUT-request with body.")
     public Response makePutRequest(String url, Map<String, String> editData) {
         return given()
                 .filter(new AllureRestAssured())
@@ -76,8 +76,8 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
-    @Step("Make a PUT-request with token and auth cookie")
-    public Response makeDeleteRequest(String url,  String token, String cookie) {
+    @Step("Make a PUT-request with token and auth cookie.")
+    public Response makeDeleteRequest(String url, String token, String cookie) {
         return given()
                 .filter(new AllureRestAssured())
                 .header(new Header(ResponseConstant.X_CSRF_TOKEN, token))
