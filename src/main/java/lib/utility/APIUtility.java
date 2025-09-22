@@ -90,6 +90,8 @@ public class APIUtility {
                 if (redirectCount > redirectLimit) {
                     throw new TooManyAttemptsException("Redirects limit exceeded!");
                 }
+            } else {
+                throw new IllegalStateException("Something went wrong. Unexpected Status Code");
             }
         }
         return redirectCount;
